@@ -15,6 +15,7 @@ if (isset($_POST["enviar"])) {
         $sql = "INSERT INTO clientes (nombre, apellido, telefono, correo) VALUES ('$nombre', '$apellido', '$telefono', '$correo')";
         if (mysqli_query($conn, $sql)) {
             echo "Cliente registrado correctamente.";
+            echo "<a href='registrar_vehiculo.php'>Registrar vehículo</a>";
         } else {
             echo "Error al registrar el vehículo: " . mysqli_error($conn);
         }
@@ -52,7 +53,8 @@ if (isset($_POST["enviar"])) {
             Correo: <input type="email" name="correo" id="correo" placeholder="Correo" required>
         </label>
 
-        <input type="submit" name="enviar" value="Crear cliente">
+        <input type="submit" name="enviar" value="Registrar datos del cliente">
+        <a href="index.html">Volver al inicio</a> <!-- Botón "Volver al inicio" -->
     </form>
 </body>
 </html>
