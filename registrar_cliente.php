@@ -1,38 +1,58 @@
 <?php
-$host = "localhost";
-$port = "3306";
-$username = "root";
-$password = "";
-$dbname = "parqueadero";
+require("./config.php");
 
-// Conexión a la base de datos
-$conn = new mysqli($host, $username, $password, $dbname, $port);
+if (isset($_POST["enviar"])) {
+    $nombre = $_POST["nombre"];
+    $apellido = $_POST["apellido"];
+    $telefono = $_POST["telefono"];
+    $correo = $_POST["correo"];
 
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-echo "Conexión exitosa.";
-
-// Recibir los datos del formulario
-$nombre = $_POST["nombre"];
-$apellido = $_POST["apellido"];
-$correo = $_POST["correo"];
-$telefono = $_POST["telefono"];
-
-// Validar los campos del formulario
-if (empty($nombre) || empty($apellido) || empty($correo) || empty($telefono)) {
-    echo "Por favor complete todos los campos.";
-} else {
-    // Insertar los datos en la tabla "clientes"
-    $sql = "INSERT INTO clientes (nombre, apellido, correo, telefono) VALUES ('$nombre', '$apellido', '$correo', '$telefono')";
-    if (mysqli_query($conn, $sql)) {
-        echo "Cliente registrado correctamente.";
+    // Validar los campos del formulario
+    if (empty($nombre) || empty($apellido) || empty($telefono) || empty($correo)) {
+        echo "Por favor complete todos los campos.";
     } else {
-        echo "Error al registrar el cliente: " . mysqli_error($conn);
+        // Insertar los datos en la tabla "vehiculos"
+        $sql = "INSERT INTO clientes (nombre, apellido, telefono, correo) VALUES ('$nombre', '$apellido', '$telefono', '$correo')";
+        if (mysqli_query($conn, $sql)) {
+            echo "Cliente registrado correctamente.";
+        } else {
+            echo "Error al registrar el vehículo: " . mysqli_error($conn);
+        }
     }
 }
-
-// Cerrar la conexión a la base de datos
-mysqli_close($conn);
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar cliente</title>
+
+    <style>
+        label {
+            display: block;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <label for="nombre">
+            Nombre: <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+        </label>
+        <label for="apellido">
+            Apellido: <input type="text" name="apellido" id="apellido" placeholder="Apellido" required>
+        </label>
+        <label for="telefono">
+            Teléfono: <input type="tel" name="telefono" id="telefono" placeholder="Teléfono" required>
+        </label>
+        <label for="correo">
+            Correo: <input type="email" name="correo" id="correo" placeholder="Correo" required>
+        </label>
+
+        <input type="submit" name="enviar" value="Crear cliente">
+    </form>
+</body>
+</html>
