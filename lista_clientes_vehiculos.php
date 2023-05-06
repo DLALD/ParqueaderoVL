@@ -2,7 +2,7 @@
 require("./config.php");
 
 // Obtener la lista de clientes y sus vehículos registrados
-$sql = "SELECT c.nombre, c.apellido, v.placa, v.marca, v.modelo, v.color
+$sql = "SELECT c.nombre, c.apellido, v.placa, v.marca, v.modelo, v.color, v.puesto
         FROM clientes c
         INNER JOIN vehiculos v ON c.id_cliente = v.id_cliente";
 $resultado = mysqli_query($conn, $sql);
@@ -12,7 +12,7 @@ if (mysqli_num_rows($resultado) > 0) {
     echo "<h2>Lista de clientes y vehículos registrados:</h2>";
     echo "<table>";
     echo "<thead>";
-    echo "<tr><th>Nombre</th><th>Apellido</th><th>Placa</th><th>Marca</th><th>Modelo</th><th>Color</th></tr>";
+    echo "<tr><th>Nombre</th><th>Apellido</th><th>Placa</th><th>Marca</th><th>Modelo</th><th>Color</th><th>Puesto</th></tr>";
     echo "</thead>";
     echo "<tbody>";
 
@@ -25,6 +25,7 @@ if (mysqli_num_rows($resultado) > 0) {
         echo "<td>" . $fila["marca"] . "</td>";
         echo "<td>" . $fila["modelo"] . "</td>";
         echo "<td>" . $fila["color"] . "</td>";
+        echo "<td>" . $fila["puesto"] . "</td>";
         echo "</tr>";
     }
 
