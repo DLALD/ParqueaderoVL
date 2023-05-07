@@ -33,6 +33,8 @@ if (mysqli_num_rows($resultado) > 0) {
 
     echo "</tbody>";
     echo "</table>";
+    echo "<br>";
+echo "<a href='index.html'>Volver</a>";
 } else {
     echo "No se encontraron registros de clientes y vehículos.";
 }
