@@ -57,7 +57,7 @@ if (isset($_POST["enviar"])) {
             }
             ?>
         </select><br><br>
-        <input type="submit" name="enviar" value="Registrar">
+        <input type="submit" name="enviar" value="Registrar Vehiculo">
         <a href="index.html">Volver al inicio</a> <!-- Botón "Volver al inicio" -->
     </form>
 </body>
