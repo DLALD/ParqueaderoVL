@@ -74,6 +74,11 @@ if (isset($_POST["enviar"])) {
             </div>
             <button type="submit" class="btn btn-primary" name="enviar">Registrar Vehiculo</button>
             <a href="index.html" class="btn btn-secondary">Volver al inicio</a> <!-- Botón "Volver al inicio" -->
+            <?php
+        if (isset($_POST["enviar"])) {
+            echo "<a href='lista_clientes_vehiculos.php'' class='btn btn-info'>Ir a la lista</a>"; // Botón "Registrar vehículo"
+        }
+        ?>
         </form>
     </div>
 
