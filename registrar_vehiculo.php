@@ -30,36 +30,58 @@ if (isset($_POST["enviar"])) {
 
 <head>
     <title>Registrar Vehiculo</title>
+    <!-- Agrega los enlaces a los archivos CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
-    <h2>Registrar Vehiculo</h2>
-    <form method="post" action="">
-        <label>Placa:</label>
-        <input type="text" name="placa" required><br><br>
-        <label>Marca:</label>
-        <input type="text" name="marca" required><br><br>
-        <label>Modelo:</label>
-        <input type="text" name="modelo" required><br><br>
-        <label>Color:</label>
-        <input type="text" name="color" required><br><br>
-        <label>Puesto:</label>
-        <input type="text" name="puesto" required><br><br>
-        <label>Cliente:</label>
-        <select name="cliente">
-            <option value="">Seleccionar cliente</option>
-            <?php
-            // Obtener los dueños registrados en la base de datos
-            $sql = "SELECT * FROM clientes";
-            $resultado = mysqli_query($conn, $sql);
-            while ($cliente = mysqli_fetch_array($resultado)) {
-                echo "<option value='" . $cliente['id_cliente'] . "'>" . $cliente['nombre'] . " " . $cliente['apellido'] . "</option>";
-            }
-            ?>
-        </select><br><br>
-        <input type="submit" name="enviar" value="Registrar Vehiculo">
-        <a href="index.html">Volver al inicio</a> <!-- Botón "Volver al inicio" -->
-    </form>
+    <div class="container">
+        <h2 class="mt-4 mb-4">Registrar Vehiculo</h2>
+        <form method="post" action="">
+            <div class="form-group">
+                <label for="placa">Placa:</label>
+                <input type="text" class="form-control" name="placa" required>
+            </div>
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" class="form-control" name="marca" required>
+            </div>
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input type="text" class="form-control" name="modelo" required>
+            </div>
+            <div class="form-group">
+                <label for="color">Color:</label>
+                <input type="text" class="form-control" name="color" required>
+            </div>
+            <div class="form-group">
+                <label for="puesto">Puesto:</label>
+                <input type="text" class="form-control" name="puesto" required>
+            </div>
+            <div class="form-group">
+                <label for="cliente">Cliente:</label>
+                <select class="form-control" name="cliente">
+                    <option value="">Seleccionar cliente</option>
+                    <?php
+                    // Obtener los dueños registrados en la base de datos
+                    $sql = "SELECT * FROM clientes";
+                    $resultado = mysqli_query($conn, $sql);
+                    while ($cliente = mysqli_fetch_array($resultado)) {
+                        echo "<option value='" . $cliente['id_cliente'] . "'>" . $cliente['nombre'] . " " . $cliente['apellido'] . "</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" name="enviar">Registrar Vehiculo</button>
+            <a href="index.html" class="btn btn-secondary">Volver al inicio</a> <!-- Botón "Volver al inicio" -->
+        </form>
+    </div>
+
+    <!-- Agrega los scripts de Bootstrap al final del archivo -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
+
