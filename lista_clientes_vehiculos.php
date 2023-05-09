@@ -5,10 +5,20 @@
     <title>Lista de clientes y vehículos</title>
     <!-- Agrega los enlaces a los archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #E7830D;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
+    <style>
+        div {
+            background-color: #FFFCF9;
+        }
+    </style>
         <h2>Lista de clientes y vehículos registrados:</h2>
         <table class="table">
             <thead class="thead-dark">

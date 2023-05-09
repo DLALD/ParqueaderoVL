@@ -32,6 +32,11 @@ if (isset($_POST["enviar"])) {
     <title>Registrar Vehiculo</title>
     <!-- Agrega los enlaces a los archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #E7830D;
+        }
+    </style>
 </head>
 
 <body>

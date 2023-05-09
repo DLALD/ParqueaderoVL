@@ -43,6 +43,11 @@ if (isset($_POST["guardar"])) {
     <title>Editar vehículo | <?php echo $id; ?></title>
     <!-- Agrega los estilos de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #858584;
+        }
+    </style>
 </head>
 
 <body>

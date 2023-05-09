@@ -46,6 +46,11 @@ if (isset($_POST["guardar"])) {
             margin: 10px;
         }
     </style>
+    <style>
+        body {
+            background-color: #858584;
+        }
+    </style>
 </head>
 
 <body>
