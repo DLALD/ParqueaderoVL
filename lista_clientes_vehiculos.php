@@ -70,6 +70,7 @@
         </table>
         <br>
         <a href='index.html' class='btn btn-secondary'>Volver</a>
+        <a href="registrar_cliente.php" class="btn btn-primary ">Registrar cliente</a> <!-- Botón "Registrar cliente" -->
     </div>
 
     <!-- Agrega los scripts de Bootstrap al final del archivo -->
