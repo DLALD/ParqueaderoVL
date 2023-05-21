@@ -12,19 +12,42 @@ require("./config.php");
     <title>Listado de Dueños</title>
     <!-- Agregar enlaces a los archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #E7830D;
+        }
+        table {
+            background-color: #FFFCF9;
+        }
+        th {
+            background-color: #343A40;
+            color: white;
+        }
+        td {
+            background-color: #F8F9FA;
+            text-align: center; /* Centrar el contenido de las celdas */
+        }
+    </style>
+    <style>
+        td {
+            background-color: #F8F9FA;
+            text-align: center; /* Centrar el contenido de las celdas */
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <h2>Listado de Dueños</h2>
+        <center><h2>Listado de Dueños</h2></center>
         <table class="table table-bordered">
-            <thead class="thead-dark">
+            <thead class="thead-dark text-center">
                 <tr>
                     <th>Nombre</th>
                     <th>Apellido</th>
+                    <th>Cédula</th>
                     <th>Teléfono</th>
                     <th>Correo</th>
-                    <th>Acciones</th>
+                    <th>Editar </th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +63,7 @@ require("./config.php");
                         $id = $dueño['id'];
                         $nombre = $dueño['nombre'];
                         $apellido = $dueño['apellido'];
+                        $cedula = $dueño['Cedula'];
                         $telefono = $dueño['telefono'];
                         $correo = $dueño['correo'];
 
@@ -47,16 +71,17 @@ require("./config.php");
                         echo "<tr>";
                         echo "<td>" . $nombre . "</td>";
                         echo "<td>" . $apellido . "</td>";
+                        echo "<td>" . $cedula . "</td>";
                         echo "<td>" . $telefono . "</td>";
                         echo "<td>" . $correo . "</td>";
                         echo "<td>";
-                        echo "<a href='editar_dueño.php?id=".$id."' class='btn btn-primary btn-sm'>Editar</a>"; // Enlace para editar
+                        echo "<a href='editar_dueño.php?id=".$id."'><img src='icons/edit.png' alt='Editar'></a>"; // Enlace para editar con icono
                         echo "</td>";
                         echo "</tr>";
                     }
                 } else {
                     // Mostrar mensaje si no se encontraron dueños en la base de datos
-                    echo "<tr><td colspan='5'>No se encontraron dueños en la base de datos.</td></tr>";
+                    echo "<tr><td colspan='6'>No se encontraron dueños en la base de datos.</td></tr>";
                 }
 
                 // Cerrar la conexión a la base de datos
@@ -65,7 +90,7 @@ require("./config.php");
             </tbody>
         </table>
         <a href='index.html' class='btn btn-secondary'>Volver</a>
-        <a href="registrar_dueño.php" class="btn btn-primary ">Registrar dueño</a> <!-- Botón "Registrar dueño" -->
+       
     </div>
 
     <!-- Agregar los scripts de JavaScript de Bootstrap -->
@@ -75,4 +100,3 @@ require("./config.php");
 </body>
 
 </html>
-

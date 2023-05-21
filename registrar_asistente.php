@@ -5,20 +5,21 @@ if (isset($_POST["registrar"])) {
     // Recibir los datos del formulario
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
+    $cedula = $_POST["Cedula"];
     $telefono = $_POST["telefono"];
     $correo = $_POST["correo"];
     $salario = $_POST["salario"];
 
     // Validar los campos del formulario
-    if (empty($nombre) || empty($apellido) || empty($telefono) || empty($correo) || empty($salario)) {
+    if (empty($nombre) || empty($apellido) || empty($cedula) || empty($telefono) || empty($correo) || empty($salario)) {
         echo "Por favor complete todos los campos.";
     } else {
         // Insertar los datos en la tabla "asistentes"
-        $sql = "INSERT INTO asistentes (nombre, apellido, telefono, correo, salario) VALUES ('$nombre', '$apellido', '$telefono', '$correo', '$salario')";
+        $sql = "INSERT INTO asistentes (nombre, apellido, Cedula, telefono, correo, salario) VALUES ('$nombre', '$apellido', '$cedula', '$telefono', '$correo', '$salario')";
         if (mysqli_query($conn, $sql)) {
-            echo "Asistente registrado correctamente.";
+            echo "<script>alert('Asistente Administrativo registrado correctamente.');</script>";
         } else {
-            echo "Error al registrar el asistente: " . mysqli_error($conn);
+            echo "<script>alert('Error al registrar el Asistente Administrativo.');</script>" . mysqli_error($conn);
         }
     }
 }
@@ -34,11 +35,16 @@ if (isset($_POST["registrar"])) {
     <title>Registrar Asistente</title>
     <!-- Agregar enlaces a los archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #E7830D;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <h2>Registrar Asistente</h2>
+       <center> <h2>Registrar Asistente</h2></center>
         <form method="post" action="">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
@@ -47,6 +53,10 @@ if (isset($_POST["registrar"])) {
             <div class="form-group">
                 <label for="apellido">Apellido:</label>
                 <input type="text" class="form-control" id="apellido" name="apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="Cedula">Cédula:</label>
+                <input type="text" class="form-control" id="Cedula" name="Cedula" required>
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>

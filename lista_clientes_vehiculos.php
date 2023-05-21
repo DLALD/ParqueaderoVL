@@ -1,5 +1,5 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <title>Lista de clientes y vehículos</title>
@@ -9,29 +9,35 @@
         body {
             background-color: #E7830D;
         }
+        table {
+            background-color: #FFFCF9;
+        }
+        th {
+            background-color: #343A40;
+            color: white;
+        }
+        td {
+            background-color: #F8F9FA;
+            text-align: center; /* Centrar el contenido de las celdas */
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-    <style>
-        div {
-            background-color: #FFFCF9;
-        }
-    </style>
-        <h2>Lista de clientes y vehículos registrados:</h2>
-        <table class="table">
-            <thead class="thead-dark">
+        <center><h3>Lista de clientes y vehículos registrados</h3></center>
+        <table class="table table-bordered">
+            <thead class="thead-dark text-center">
                 <tr>
                     <th>Nombre</th>
-                    <th>Apellido</th>
+                    <th>Cédula</th>
                     <th>Placa</th>
                     <th>Marca</th>
                     <th>Modelo</th>
                     <th>Color</th>
-                    <th>Puesto</th>
                     <th>Editar cliente</th>
                     <th>Editar vehículo</th>
+                    <th>Eliminar vehículo</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,7 +45,7 @@
                 require("./config.php");
 
                 // Obtener la lista de clientes y sus vehículos registrados
-                $sql = "SELECT clientes.id_cliente, clientes.nombre, clientes.apellido, vehiculos.placa, vehiculos.marca, vehiculos.modelo, vehiculos.color, vehiculos.puesto, vehiculos.id
+                $sql = "SELECT clientes.id_cliente, clientes.nombre, clientes.cedula, vehiculos.placa, vehiculos.marca, vehiculos.modelo, vehiculos.color, vehiculos.id
                         FROM clientes
                         INNER JOIN vehiculos ON clientes.id_cliente = vehiculos.id_cliente";
                 $resultado = mysqli_query($conn, $sql);
@@ -49,14 +55,14 @@
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         echo "<tr>";
                         echo "<td>" . $fila["nombre"] . "</td>";
-                        echo "<td>" . $fila["apellido"] . "</td>";
+                        echo "<td>" . $fila["cedula"] . "</td>";
                         echo "<td>" . $fila["placa"] . "</td>";
                         echo "<td>" . $fila["marca"] . "</td>";
                         echo "<td>" . $fila["modelo"] . "</td>";
                         echo "<td>" . $fila["color"] . "</td>";
-                        echo "<td>" . $fila["puesto"] . "</td>";
-                        echo "<td>" . "<a href='editar_cliente.php?id=" . $fila["id_cliente"] . "' class='btn btn-primary'>Editar</a>" . "</td>";
-                        echo "<td>" . "<a href='editar_vehiculo.php?id=" . $fila["id"] . "' class='btn btn-primary'>Editar</a>" . "</td>";
+                        echo "<td>" . "<a href='editar_cliente.php?id=" . $fila["id_cliente"] . "'><img src='icons/edit.png' alt='Editar'></a>" . "</td>";
+                        echo "<td>" . "<a href='editar_vehiculo.php?id=" . $fila["id"] . "'><img src='icons/edit.png' alt='Editar'></a>" . "</td>";
+                        echo "<td>" . "<a href='eliminar_vehiculo.php?id=" . $fila["id"] . "'><img src='icons/delete.png' alt='Eliminar'></a>" . "</td>";
                         echo "</tr>";
                     }
                 } else {
@@ -70,7 +76,7 @@
         </table>
         <br>
         <a href='index.html' class='btn btn-secondary'>Volver</a>
-        <a href="registrar_cliente.php" class="btn btn-primary ">Registrar cliente</a> <!-- Botón "Registrar cliente" -->
+        <a href="registrar_cliente.php" class="btn btn-primary">Registrar cliente</a> <!-- Botón "Registrar cliente" -->
     </div>
 
     <!-- Agrega los scripts de Bootstrap al final del archivo -->

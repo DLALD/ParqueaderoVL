@@ -1,22 +1,25 @@
 <?php
 require("./config.php");
 
+$mensaje = ""; // Variable para almacenar el mensaje de registro
+
 if (isset($_POST["enviar"])) {
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
+    $cedula = $_POST["cedula"];
     $telefono = $_POST["telefono"];
     $correo = $_POST["correo"];
 
     // Validar los campos del formulario
-    if (empty($nombre) || empty($apellido) || empty($telefono) || empty($correo)) {
-        echo "Por favor complete todos los campos.";
+    if (empty($nombre) || empty($apellido) || empty($cedula) || empty($telefono) || empty($correo)) {
+        $mensaje = "Por favor complete todos los campos.";
     } else {
         // Insertar los datos en la tabla "clientes"
-        $sql = "INSERT INTO clientes (nombre, apellido, telefono, correo) VALUES ('$nombre', '$apellido', '$telefono', '$correo')";
+        $sql = "INSERT INTO clientes (nombre, apellido, cedula, telefono, correo) VALUES ('$nombre', '$apellido', '$cedula', '$telefono', '$correo')";
         if (mysqli_query($conn, $sql)) {
-            echo "Cliente registrado correctamente.";
+            $mensaje = "Cliente registrado correctamente.";
         } else {
-            echo "Error al registrar el cliente: " . mysqli_error($conn);
+            $mensaje = "Error al registrar el cliente: " . mysqli_error($conn);
         }
     }
 }
@@ -53,6 +56,10 @@ if (isset($_POST["enviar"])) {
                         <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" required>
                     </div>
                     <div class="form-group">
+                        <label for="cedula">Cédula:</label>
+                        <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Cédula" required>
+                    </div>
+                    <div class="form-group">
                         <label for="telefono">Teléfono:</label>
                         <input type="tel" class="form-control" name="telefono" id="telefono" placeholder="Teléfono" required>
                     </div>
@@ -64,6 +71,11 @@ if (isset($_POST["enviar"])) {
                     <input type="submit" class="btn btn-primary" name="enviar" value="Registrar cliente">
                     <a href="index.html" class="btn btn-secondary">Volver al inicio</a> <!-- Botón "Volver al inicio" -->
                     <?php
+        if (!empty($mensaje)) {
+            echo "<script>alert('$mensaje');</script>";
+        }
+        ?>
+          <?php
         if (isset($_POST["enviar"])) {
             echo "<a href='registrar_vehiculo.php' class='btn btn-info'>Registrar vehículo</a>"; // Botón "Registrar vehículo"
         }

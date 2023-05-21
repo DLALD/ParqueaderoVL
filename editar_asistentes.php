@@ -8,6 +8,7 @@ if (mysqli_num_rows($consulta) > 0) {
     while ($fila = mysqli_fetch_assoc($consulta)) {
         $nombre = $fila["nombre"];
         $apellido = $fila["apellido"];
+        $cedula = $fila["Cedula"];
         $telefono = $fila["telefono"];
         $correo = $fila["correo"];
         $salario = $fila["salario"];
@@ -17,19 +18,21 @@ if (mysqli_num_rows($consulta) > 0) {
 if (isset($_POST["guardar"])) {
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
+    $cedula = $_POST["Cedula"];
     $telefono = $_POST["telefono"];
     $correo = $_POST["correo"];
     $salario = $_POST["salario"];
 
-    $update = mysqli_query($conn, "UPDATE asistentes SET nombre = '$nombre', apellido = '$apellido', telefono = '$telefono', correo = '$correo', salario = '$salario' WHERE id = $id");
+    $update = mysqli_query($conn, "UPDATE asistentes SET nombre = '$nombre', apellido = '$apellido', Cedula = '$cedula', telefono = '$telefono', correo = '$correo', salario = '$salario' WHERE id = $id");
     if ($update) {
         echo "<script>window.alert('Datos actualizados correctamente');</script>";
-        echo "<script>window.location = 'editar_asistentes.php?id=" . $id . "';</script>";
+        echo "<script>window.location = 'lista_asistentes.php?id=" . $id . "';</script>";
     } else {
         echo "Error";
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,11 +43,22 @@ if (isset($_POST["guardar"])) {
     <title>Editar Asistente | <?php echo $id; ?></title>
     <!-- Agregar los estilos de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        label {
+            display: block;
+            margin: 10px;
+        }
+    </style>
+    <style>
+        body {
+            background-color: #858584;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <h2>Editar Asistente</h2>
+    <Center><h2>Editar Asistente</h2></Center>
         <form action="" method="post">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
@@ -53,6 +67,10 @@ if (isset($_POST["guardar"])) {
             <div class="form-group">
                 <label for="apellido">Apellido:</label>
                 <input type="text" class="form-control" name="apellido" value="<?php echo $apellido; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="Cedula">Cédula:</label>
+                <input type="text" class="form-control" name="Cedula" value="<?php echo $cedula; ?>" required>
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>

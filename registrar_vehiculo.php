@@ -7,19 +7,19 @@ if (isset($_POST["enviar"])) {
     $marca = $_POST["marca"];
     $modelo = $_POST["modelo"];
     $color = $_POST["color"];
-    $puesto = $_POST["puesto"];
     $id_cliente = intval($_POST["cliente"]);
 
     // Validar los campos del formulario
-    if (empty($placa) || empty($marca) || empty($modelo) || empty($color) || empty($puesto) || empty($id_cliente)) {
+    if (empty($placa) || empty($marca) || empty($modelo) || empty($color) || empty($id_cliente)) {
         echo "Por favor complete todos los campos.";
     } else {
         // Insertar los datos en la tabla "vehiculos"
-        $sql = "INSERT INTO vehiculos (placa, marca, modelo, color, puesto, id_cliente) VALUES ('$placa', '$marca', '$modelo', '$color', '$puesto', '$id_cliente')";
+        $sql = "INSERT INTO vehiculos (placa, marca, modelo, color, id_cliente) VALUES ('$placa', '$marca', '$modelo', '$color', '$id_cliente')";
         if (mysqli_query($conn, $sql)) {
-            echo "Vehículo registrado correctamente.";
+            //echo "Vehículo registrado correctamente.";
+            echo "<script>alert('Vehículo registrado correctamente.');</script>";
         } else {
-            echo "Error al registrar el vehículo: " . mysqli_error($conn);
+            echo "<script>alert('Error al registrar el vehículo.');</script>" . mysqli_error($conn);
         }
     }
 }
@@ -60,10 +60,6 @@ if (isset($_POST["enviar"])) {
                 <input type="text" class="form-control" name="color" required>
             </div>
             <div class="form-group">
-                <label for="puesto">Puesto:</label>
-                <input type="text" class="form-control" name="puesto" required>
-            </div>
-            <div class="form-group">
                 <label for="cliente">Cliente:</label>
                 <select class="form-control" name="cliente">
                     <option value="">Seleccionar cliente</option>
@@ -80,10 +76,10 @@ if (isset($_POST["enviar"])) {
             <button type="submit" class="btn btn-primary" name="enviar">Registrar Vehiculo</button>
             <a href="index.html" class="btn btn-secondary">Volver al inicio</a> <!-- Botón "Volver al inicio" -->
             <?php
-        if (isset($_POST["enviar"])) {
-            echo "<a href='lista_clientes_vehiculos.php'' class='btn btn-info'>Ir a la lista</a>"; // Botón "Registrar vehículo"
-        }
-        ?>
+            if (isset($_POST["enviar"])) {
+                echo "<a href='lista_clientes_vehiculos.php' class='btn btn-info'>Ir a la lista</a>"; // Botón "Ir a la lista"
+            }
+            ?>
         </form>
     </div>
 
@@ -94,4 +90,3 @@ if (isset($_POST["enviar"])) {
 </body>
 
 </html>
-

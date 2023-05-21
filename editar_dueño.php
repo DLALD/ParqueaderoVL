@@ -7,11 +7,12 @@ $id = $_GET["id"];
 if (isset($_POST["guardar"])) {
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
+    $cedula = $_POST["Cedula"];
     $telefono = $_POST["telefono"];
     $correo = $_POST["correo"];
 
     // Actualizar los datos del dueño en la base de datos
-    $update = mysqli_query($conn, "UPDATE dueños SET nombre = '$nombre', apellido = '$apellido', telefono = '$telefono', correo = '$correo' WHERE id = $id");
+    $update = mysqli_query($conn, "UPDATE dueños SET nombre = '$nombre', apellido = '$apellido', Cedula = '$cedula', telefono = '$telefono', correo = '$correo' WHERE id = $id");
     if ($update) {
         echo "<script>window.alert('Datos actualizados correctamente');</script>";
         echo "<script>window.location = 'lista_dueño.php';</script>";
@@ -26,6 +27,7 @@ if (mysqli_num_rows($consulta) > 0) {
     while ($fila = mysqli_fetch_assoc($consulta)) {
         $vistanombre = $fila["nombre"];
         $vistaapellido = $fila["apellido"];
+        $vistacedula = $fila["Cedula"];
         $vistatelefono = $fila["telefono"];
         $vistacorreo = $fila["correo"];
     }
@@ -42,11 +44,22 @@ if (mysqli_num_rows($consulta) > 0) {
     <title>Editar Dueño | <?php echo $id; ?></title>
     <!-- Agregar enlaces a los archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        label {
+            display: block;
+            margin: 10px;
+        }
+    </style>
+    <style>
+        body {
+            background-color: #858584;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <h2>Editar Dueño | <?php echo $id; ?></h2>
+        <Center><h2>Editar Informacion  </h2></Center>
 
         <form action="" method="post">
             <div class="form-group">
@@ -56,6 +69,10 @@ if (mysqli_num_rows($consulta) > 0) {
             <div class="form-group">
                 <label for="apellido">Apellido:</label>
                 <input type="text" class="form-control" id="apellido" name="apellido" value="<?php echo $vistaapellido; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="Cedula">Cédula:</label>
+                <input type="text" class="form-control" id="Cedula" name="Cedula" value="<?php echo $vistacedula; ?>" required>
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
@@ -70,7 +87,6 @@ if (mysqli_num_rows($consulta) > 0) {
         </form>
     </div>
 
-    <!-- Agregar los scripts de JavaScript de bootstrao y jquery-->
     <!-- Agregar los scripts de JavaScript de Bootstrap y jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

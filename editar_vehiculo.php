@@ -4,13 +4,12 @@ require("./config.php");
 $id = $_GET["id"];
 
 $consulta = mysqli_query($conn, "SELECT * FROM vehiculos WHERE id = $id");
-if(mysqli_num_rows($consulta) > 0) {
-    while($fila = mysqli_fetch_assoc($consulta)) {
+if (mysqli_num_rows($consulta) > 0) {
+    while ($fila = mysqli_fetch_assoc($consulta)) {
         $vistaplaca = $fila["placa"];
         $vistamarca = $fila["marca"];
         $vistamodelo = $fila["modelo"];
         $vistacolor = $fila["color"];
-        $vistapuesto = $fila["puesto"];
         $vistacliente = $fila["id_cliente"];
     }
 }
@@ -20,13 +19,12 @@ if (isset($_POST["guardar"])) {
     $marca = $_POST["marca"];
     $modelo = $_POST["modelo"];
     $color = $_POST["color"];
-    $puesto = $_POST["puesto"];
     $cliente = intval($_POST["cliente"]);
 
-    $update = mysqli_query($conn, "UPDATE vehiculos SET placa = '$placa', marca = '$marca', modelo = '$modelo', color = '$color', puesto = '$puesto', id_cliente = '$cliente' WHERE id = $id");
-    if($update) {
+    $update = mysqli_query($conn, "UPDATE vehiculos SET placa = '$placa', marca = '$marca', modelo = '$modelo', color = '$color', id_cliente = '$cliente' WHERE id = $id");
+    if ($update) {
         echo "<script>window.alert('Datos actualizados correctamente');</script>";
-        echo "<script>window.location = 'editar_vehiculo.php?id=".$id."';</script>";
+        echo "<script>window.location = 'lista_clientes_vehiculos.php?id=" . $id . "';</script>";
     } else {
         echo "Error";
     }
@@ -52,7 +50,7 @@ if (isset($_POST["guardar"])) {
 
 <body>
     <div class="container">
-        <h2>Editar vehículo | <?php echo $id; ?></h2>
+    <Center><h2>Editar Informacion del vehiculo </h2></Center>
         <form action="" method="post">
             <div class="form-group">
                 <label for="placa">Placa:</label>
@@ -71,26 +69,21 @@ if (isset($_POST["guardar"])) {
                 <input type="text" name="color" class="form-control" value="<?php echo $vistacolor; ?>" required>
             </div>
             <div class="form-group">
-                <label for="puesto">Puesto:</label>
-                <input type="text" name="puesto" class="form-control" value="<?php echo $vistapuesto; ?>" required>
-            </div>
-            <div class="form-group">
                 <label for="cliente">Cliente:</label>
                 <select name="cliente" id="cliente" class="form-control">
-                   
-                <option value="">Seleccionar cliente</option>
+                    <option value="">Seleccionar cliente</option>
                     <?php
                     // Obtener los dueños registrados en la base de datos
                     $sql = "SELECT * FROM clientes";
                     $resultado = mysqli_query($conn, $sql);
                     $seleccionado = "";
                     while ($cliente = mysqli_fetch_array($resultado)) {
-                        if($cliente["id_cliente"] == $vistacliente) {
+                        if ($cliente["id_cliente"] == $vistacliente) {
                             $seleccionado = "selected";
                         } else {
                             $seleccionado = "";
                         }
-                        echo "<option value='" . $cliente['id_cliente'] . "' ".$seleccionado.">" . $cliente['nombre'] . " " . $cliente['apellido'] . "</option>";
+                        echo "<option value='" . $cliente['id_cliente'] . "' " . $seleccionado . ">" . $cliente['nombre'] . " " . $cliente['apellido'] . "</option>";
                     }
                     ?>
                 </select>

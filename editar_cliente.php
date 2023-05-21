@@ -8,6 +8,7 @@ if (mysqli_num_rows($consulta) > 0) {
     while ($fila = mysqli_fetch_assoc($consulta)) {
         $vistanombre = $fila["nombre"];
         $vistapellido = $fila["apellido"];
+        $vistacedula = $fila["Cedula"];
         $vistatel = $fila["telefono"];
         $vistacorreo = $fila["correo"];
     }
@@ -16,13 +17,14 @@ if (mysqli_num_rows($consulta) > 0) {
 if (isset($_POST["guardar"])) {
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
+    $cedula = $_POST["cedula"];
     $telefono = $_POST["telefono"];
     $correo = $_POST["correo"];
 
-    $update = mysqli_query($conn, "UPDATE clientes SET nombre = '$nombre', apellido = '$apellido', telefono = '$telefono', correo = '$correo' WHERE id_cliente = $id");
+    $update = mysqli_query($conn, "UPDATE clientes SET nombre = '$nombre', apellido = '$apellido', Cedula = '$cedula', telefono = '$telefono', correo = '$correo' WHERE id_cliente = $id");
     if ($update) {
         echo "<script>window.alert('Datos actualizados correctamente');</script>";
-        echo "<script>window.location = 'editar_cliente.php?id=" . $id . "';</script>";
+        echo "<script>window.location = 'lista_clientes_vehiculos.php?id=" . $id . "';</script>";
     } else {
         echo "Error";
     }
@@ -55,6 +57,7 @@ if (isset($_POST["guardar"])) {
 
 <body>
     <div class="container">
+    <Center><h2>Editar Informacion del cliente </h2></Center>
         <form action="" method="post">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
@@ -63,6 +66,10 @@ if (isset($_POST["guardar"])) {
             <div class="form-group">
                 <label for="apellido">Apellido:</label>
                 <input type="text" value="<?php echo $vistapellido; ?>" name="apellido" id="apellido" class="form-control" placeholder="Apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="cedula">Cédula:</label>
+                <input type="text" value="<?php echo $vistacedula; ?>" name="cedula" id="cedula" class="form-control" placeholder="Cédula" required>
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
@@ -77,12 +84,12 @@ if (isset($_POST["guardar"])) {
             <a href="index.html" class="btn btn-secondary">Volver al inicio</a> <!-- Botón "Volver al inicio" -->
             <a href="lista_clientes_vehiculos.php" class="btn btn-info">Volver a la lista</a> <!-- Botón "Volver a la lista" -->
         </form>
-        </div>
+    </div>
 
-<!-- Agrega los scripts de Bootstrap al final del archivo -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Agrega los scripts de Bootstrap al final del archivo -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
